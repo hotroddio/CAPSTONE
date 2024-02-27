@@ -6,7 +6,7 @@ export const apiSlice = createApi({
   // The cache reducer expects to be added at `state.api` (already default - this is optional)
   reducerPath: "api",
   // All of our requests will have URLs starting with '/fakeApi'
-  baseQuery: fetchBaseQuery({ baseUrl: "https://fakestoreapi.com" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://fakestoreapi.com/" }),
   // The "endpoints" represent operations and requests for this server
   endpoints: (builder) => ({
     register: builder.mutation({
@@ -23,7 +23,12 @@ export const apiSlice = createApi({
         body: loginUser,
       }),
     }),
-  }),
-});
+      account: builder.query({
+        query: () => ({
+          url: "users/1",
+        }),
+      }),
+    }),
+  })
 
-export const { useRegisterMutation, useLoginMutation } = apiSlice;
+export const { useRegisterMutation, useLoginMutation, useAccountQuery } = apiSlice;

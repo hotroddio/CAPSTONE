@@ -6,6 +6,7 @@ import "./App.css";
 import Home from "./components/Home";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import Accounts from "./components/Accounts";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register setToken={setToken}/>} />    
         <Route path="/login" element={<Login setToken={setToken} />} />
+        <Route path="/account" element={<Accounts token={token} />} />
       </Routes>
     </BrowserRouter>
   </div>;

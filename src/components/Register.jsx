@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useRegisterMutation } from "../redux/api";
 import { useNavigate } from "react-router-dom";
 
-
 function Register(props) {
   const [userInfo, setUserInfo] = useState({
     email: "",
@@ -26,7 +25,6 @@ function Register(props) {
   const [errorMsg, setError] = useState(null);
   const [register] = useRegisterMutation();
   const navigate = useNavigate();
-
 
   const eventHandler = async (event) => {
     event.preventDefault();

@@ -8,6 +8,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Accounts from "./components/Accounts";
 import NavBar from "./components/Navbar";
+import EstoreList from './components/EstoreList';
 
 function App() {
   const [token, setToken] = useState(null);
@@ -21,6 +22,7 @@ function App() {
         <Route path="/register" element={<Register setToken={setToken}/>} />    
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/account" element={<Accounts token={token} />} />
+        <Route path="/estore" element={<EstoreList token={token} />} />
       </Routes>
     </BrowserRouter>
   </div>;

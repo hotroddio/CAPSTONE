@@ -23,12 +23,18 @@ export const apiSlice = createApi({
         body: loginUser,
       }),
     }),
-      account: builder.query({
-        query: () => ({
-          url: "users/1",
-        }),
+    account: builder.query({
+      query: () => ({
+        url: "users/1",
       }),
     }),
-  })
+    estoreList: builder.query({
+      query: () => ({
+        url: "products",
+      }),
+    }),
+  }),
+});
 
-export const { useRegisterMutation, useLoginMutation, useAccountQuery } = apiSlice;
+export const { useRegisterMutation, useLoginMutation, useAccountQuery, useEstoreListQuery } =
+  apiSlice;

@@ -25,7 +25,7 @@ function Login(props) {
         } else {    
           props.setToken(data.token);
           //TODO: change to EstoreList later
-          navigate("/account");
+          navigate("/estore");
           console.log(`in event handler ${JSON.stringify(data)}`);
         }
       };

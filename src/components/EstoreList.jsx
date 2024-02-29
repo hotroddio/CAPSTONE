@@ -1,4 +1,5 @@
 import { useEstoreListQuery } from "../redux/api";
+import { Link } from "react-router-dom";
 
 function EstoreList(props) {
   const { data, error, isLoading } = useEstoreListQuery(props.token);
@@ -16,6 +17,10 @@ function EstoreList(props) {
     return <p>Something went wrong!!!</p>;
   }
 
+  // const details = () => {
+
+  // }
+
   return (
     <div>
       <h2>E-Store List</h2>
@@ -23,12 +28,13 @@ function EstoreList(props) {
         return (
           <div key={item.id}>
             <h2>Item Name: {item.title}</h2>
-            <p>Price: ${item.description}</p>
-            <p>Category: ${item.category}</p>
+            <p>Price: ${item.price}</p>
+            <p>Category: {item.category}</p>
             <img src={item.image} alt={item.title} />
             <p>
               Rating: {item.rating.rate} ({item.rating.count} reviews)
             </p>
+            <Link to={`/estoreitem/${item.id}`}>More Information</Link>
           </div>
         );
       })}

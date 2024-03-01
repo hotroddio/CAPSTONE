@@ -24,8 +24,11 @@ export const apiSlice = createApi({
       }),
     }),
     account: builder.query({
-      query: () => ({
-        url: "users/1",
+      query: ({token, id}) => ({
+        url: `users/${id}`,
+        headers: {
+          authorization: `Bearer ${token}`,
+        }
       }),
     }),
     estoreList: builder.query({
@@ -41,8 +44,13 @@ export const apiSlice = createApi({
         }
       }),
     }),
+    getUserId: builder.query({
+      query: () => ({
+        url: `/users`,
+      }),
+    }),
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation, useAccountQuery, useEstoreListQuery, useEstoreListItemQuery } =
+export const { useRegisterMutation, useLoginMutation, useAccountQuery, useEstoreListQuery, useEstoreListItemQuery, useGetUserIdQuery } =
   apiSlice;

@@ -4,6 +4,7 @@ function NavBar(props) {
   const navigate = useNavigate();
   const logoutUser = () => {
     props.setToken(null);
+    props.setUserId(null);
     // Below statement navigates us back to the homepage after logout
     navigate("/");
   };
@@ -13,7 +14,8 @@ function NavBar(props) {
       <nav>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/estore">E-Store</NavLink>
-        <NavLink to="/account">Account</NavLink>
+        <NavLink to="/cart">Cart</NavLink>
+        <NavLink to={`/account/${props.userId}`}>Account</NavLink>
         <a onClick={logoutUser}>Logout</a>
       </nav>
     );

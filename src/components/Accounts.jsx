@@ -1,7 +1,9 @@
+import { useParams } from "react-router-dom";
 import { useAccountQuery } from "../redux/api";
 
-function Accounts(props) {
-  const { data, error, isLoading } = useAccountQuery(props.token);
+function Accounts({ token }) {
+  let {id} = useParams();
+  const { data, error, isLoading } = useAccountQuery({token, id});
 
   console.log("DATA from API", data);
   console.log("Error from API", error);

@@ -10,21 +10,24 @@ import Accounts from "./components/Accounts";
 import NavBar from "./components/Navbar";
 import EstoreList from './components/EstoreList';
 import EstoreItem from './components/EstoreItem';
+import Cart from './components/Cart';
 
 function App() {
   const [token, setToken] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   console.log("token", token);
   return <div>
     <BrowserRouter>
-    <NavBar token={token} setToken={setToken}/>
+    <NavBar token={token} setToken={setToken} setUserId={setUserId} userId={userId}/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register setToken={setToken}/>} />    
-        <Route path="/login" element={<Login setToken={setToken} />} />
-        <Route path="/account" element={<Accounts token={token} />} />
+        <Route path="/login" element={<Login setToken={setToken} setUserId={setUserId} userId={userId}/>} />
+        <Route path="/account/:id" element={<Accounts token={token} />} />
         <Route path="/estore" element={<EstoreList token={token} />} />
         <Route path="/estoreitem/:id" element={<EstoreItem token={token}/> } />
+        <Route path="/cart" element={<Cart token={token}/>} />
       </Routes>
     </BrowserRouter>
   </div>;

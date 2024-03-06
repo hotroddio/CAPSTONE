@@ -15,6 +15,7 @@ import Cart from './components/Cart';
 function App() {
   const [token, setToken] = useState(null);
   const [userId, setUserId] = useState(null);
+  const [products, setProducts] = useState(null);
 
   console.log("token", token);
   return <div>
@@ -25,9 +26,9 @@ function App() {
         <Route path="/register" element={<Register setToken={setToken}/>} />    
         <Route path="/login" element={<Login setToken={setToken} setUserId={setUserId} userId={userId}/>} />
         <Route path="/account/:id" element={<Accounts token={token} />} />
-        <Route path="/estore" element={<EstoreList token={token} />} />
+        <Route path="/estore" element={<EstoreList token={token} setProducts={setProducts}/>} />
         <Route path="/estoreitem/:id" element={<EstoreItem token={token}/> } />
-        <Route path="/cart" element={<Cart token={token}/>} />
+        <Route path="/cart/:id" element={<Cart token={token} userId={userId} products={products}/>} />
       </Routes>
     </BrowserRouter>
   </div>;

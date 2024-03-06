@@ -24,11 +24,11 @@ export const apiSlice = createApi({
       }),
     }),
     account: builder.query({
-      query: ({token, id}) => ({
+      query: ({ token, id }) => ({
         url: `users/${id}`,
         headers: {
           authorization: `Bearer ${token}`,
-        }
+        },
       }),
     }),
     estoreList: builder.query({
@@ -37,11 +37,11 @@ export const apiSlice = createApi({
       }),
     }),
     estoreListItem: builder.query({
-      query: ({token, id}) => ({
+      query: ({ token, id }) => ({
         url: `products/${id}`,
         headers: {
           authorization: `Bearer ${token}`,
-        }
+        },
       }),
     }),
     getUserId: builder.query({
@@ -49,8 +49,38 @@ export const apiSlice = createApi({
         url: `/users`,
       }),
     }),
+    cart: builder.query({
+      query: ({ token, id }) => ({
+        url: `carts/user/${id}`,
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }),
+    }),
+    addCartItem: builder.query({
+      query: ({ token, id, productId, quantity }) => ({
+        url: `carts/${id}`,
+        method: "PUT",
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          userId: id,
+          date: "",
+          products: [{ productId, quantity }],
+        }),
+      }),
+    }),
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation, useAccountQuery, useEstoreListQuery, useEstoreListItemQuery, useGetUserIdQuery } =
-  apiSlice;
+export const {
+  useRegisterMutation,
+  useLoginMutation,
+  useAccountQuery,
+  useEstoreListQuery,
+  useEstoreListItemQuery,
+  useGetUserIdQuery,
+  useCartQuery,
+  useAddCartItemQuery,
+} = apiSlice;

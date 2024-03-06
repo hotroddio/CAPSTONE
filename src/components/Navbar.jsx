@@ -14,7 +14,7 @@ function NavBar(props) {
       <nav>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/estore">E-Store</NavLink>
-        <NavLink to="/cart">Cart</NavLink>
+        <NavLink to={`/cart/${props.userId}`}>Cart</NavLink>
         <NavLink to={`/account/${props.userId}`}>Account</NavLink>
         <a onClick={logoutUser}>Logout</a>
       </nav>

@@ -1,7 +1,9 @@
 import { useEstoreListQuery } from "../redux/api";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import addCartItems from "../components/utilitiesCart";
 
 function EstoreList(props) {
+  let {id} = useParams();
   const { data, error, isLoading } = useEstoreListQuery(props.token);
 
   console.log("DATA from API", data);
@@ -17,9 +19,14 @@ function EstoreList(props) {
     return <p>Something went wrong!!!</p>;
   }
 
-  // const details = () => {
+  props.setProducts(data);
 
-  // }
+  const eventHandler = async (event) => {
+    event.preventDefault();
+    addCartItems();
+    console.log(addCartItems(data));
+
+  }
 
   return (
     <div>
@@ -28,13 +35,14 @@ function EstoreList(props) {
         return (
           <div key={item.id}>
             <h2>Item Name: {item.title}</h2>
-            <p>Price: ${item.price}</p>
+            <p>Price: ${item.price.toFixed(2)}</p>
             <p>Category: {item.category}</p>
             <img src={item.image} alt={item.title} />
             <p>
               Rating: {item.rating.rate} ({item.rating.count} reviews)
             </p>
             <Link to={`/estoreitem/${item.id}`}>More Information</Link>
+            <button>Add Item to Cart</button>
           </div>
         );
       })}

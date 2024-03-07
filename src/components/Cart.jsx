@@ -1,12 +1,14 @@
 import { useCartQuery, useEstoreListQuery } from "../redux/api";
 import { useParams } from "react-router-dom";
-// import { useState, useEffect } from "react";
+import { useState } from "react";
 // api
 
-function Cart({ token, products }) {
+function Cart({ token, products, setLocalCart, localCart }) {
   let { id } = useParams();
   let subTotalPrice = 0;
   let totalPrice = 0;
+  // const [localCart, setLocalCart] = useState(null);
+  
 
   const { data, error, isLoading } = useCartQuery({ token, id });
 
@@ -22,42 +24,76 @@ function Cart({ token, products }) {
     return <p>Something went wrong!!!</p>;
   }
 
-  let storedProductIds = data[0].products.map((product) => {
-    return product.productId;
-  });
+  
 
-  console.log(storedProductIds);
+  // console.log(storedProducts);
 
-  const cartMatch = products.filter((product) =>
-    storedProductIds.includes(product.id)
-  );
+  if(products) {
+    let storedProducts = data[0].products.map((product) => {
+      return {
+        productId: product.productId,
+        quantity: product.quantity,    
+      };
+    });
+    if (localCart===null) {
+      setLocalCart([]);
+      storedProducts.map((storedProduct) => {
+      const found = products.find(product => product.id===storedProduct.productId);
+      const newProduct = {
+        category: found.category,
+        description: found.description,
+        id: found.id,
+        image: found.image,
+        price: found.price,
+        rating: {
+          rate: found.rating.rate,
+          count: found.rating.count,
+        },
+        title: found.title,
+        quantity: storedProduct.quantity,
+      }
+      // console.log("****", newProduct);
+      setLocalCart(localCart => [...localCart, newProduct]);
+      }) 
+    }
+    
+    console.log(localCart);
+    
+      localCart?.map(
+        (item, index) => (subTotalPrice += item?.quantity * item?.price)
+      );
+    
+      totalPrice = subTotalPrice + subTotalPrice * 0.07 + 10.99;
+  }
 
-  console.log(cartMatch);
+  // const cartMatch = products.filter((product) =>
+  //   storedProducts.includes(product.id)
+  // );
 
-  data[0].products.map(
-    (item, index) => (subTotalPrice += item?.quantity * cartMatch[index]?.price)
-  );
+  // console.log(cartMatch);
+  console.log("right here", products);
 
-  totalPrice = subTotalPrice + subTotalPrice * 0.07 + 10.99;
+
+
+
 
   return (
     <div>
       <h2>Cart Items</h2>
-      {data[0].products.map((item, index) => (
-        <div key={item?.productId}>
+      {localCart?.map((item, index) => (
+        <div key={item?.id}>
           <h2>Quantity: {item?.quantity}</h2>
-          {/* Dynamically display item information */}
-          {cartMatch[index] && (
+          
             <>
-              <p>Item Name: {cartMatch[index]?.title}</p>
-              <p>Item Price: ${cartMatch[index]?.price.toFixed(2)}</p>
-              <p>Category: {cartMatch[index]?.category}</p>
+              <p>Item Name: {item?.title}</p>
+              <p>Item Price: ${item?.price.toFixed(2)}</p>
+              <p>Category: {item?.category}</p>
               <img
-                src={cartMatch[index]?.image}
-                alt={cartMatch[index]?.title}
+                src={item?.image}
+                alt={item?.title}
               />
             </>
-          )}
+          
         </div>
       ))}
       <h2>Cart Sub Total: ${subTotalPrice.toFixed(2)}</h2>

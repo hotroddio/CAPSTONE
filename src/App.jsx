@@ -16,6 +16,7 @@ function App() {
   const [token, setToken] = useState(null);
   const [userId, setUserId] = useState(null);
   const [products, setProducts] = useState(null);
+  const [localCart, setLocalCart] = useState(null);
 
   console.log("token", token);
   return <div>
@@ -28,7 +29,7 @@ function App() {
         <Route path="/account/:id" element={<Accounts token={token} />} />
         <Route path="/estore" element={<EstoreList token={token} setProducts={setProducts}/>} />
         <Route path="/estoreitem/:id" element={<EstoreItem token={token}/> } />
-        <Route path="/cart/:id" element={<Cart token={token} userId={userId} products={products}/>} />
+        <Route path="/cart/:id" element={<Cart token={token} userId={userId} products={products} localCart={localCart} setLocalCart={setLocalCart}/>} />
       </Routes>
     </BrowserRouter>
   </div>;

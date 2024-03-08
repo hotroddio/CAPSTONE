@@ -26,9 +26,9 @@ function Cart({ token, products, setLocalCart, localCart }) {
 
   
 
-  // console.log(storedProducts);
+  console.log(products);
 
-  if(products) {
+  if(products?.length > 0 && data?.length>0) {
     let storedProducts = data[0].products.map((product) => {
       return {
         productId: product.productId,
@@ -64,6 +64,9 @@ function Cart({ token, products, setLocalCart, localCart }) {
       );
     
       totalPrice = subTotalPrice + subTotalPrice * 0.07 + 10.99;
+  } 
+  else {
+    return <p>Cart Empty</p>;
   }
 
   // const cartMatch = products.filter((product) =>

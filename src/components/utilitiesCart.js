@@ -1,13 +1,14 @@
 import { useCartQuery } from "../redux/api";
 import { useParams } from "react-router-dom";
+import { useState} from "react";
 
-function addCartItems({ token, products }) {
+function addCartItems({ token, products , setLocalCart, localCart}) {
   let { id } = useParams();
-  const { data, error, isLoading } = useCartQuery({ token, id });
+  // const { data, error, isLoading } = useCartQuery({ token, id });
 
-  console.log("DATA from API", data);
-  console.log("Error from API", error);
-  console.log("isLoading", isLoading);
+  // console.log("DATA from API", data);
+  // console.log("Error from API", error);
+  // console.log("isLoading", isLoading);
 
   //   if (isLoading) {
   //     return <p>Loading...</p>;
@@ -17,15 +18,17 @@ function addCartItems({ token, products }) {
   //     return <p>Something went wrong!!!</p>;
   //   }
 
-  let storedProductIds = data[0].products.map((product) => {
-    return product.productId;
-  });
+  // let storedProductIds = data[0].products.map((product) => {
+  //   return product.productId;
+  // });
 
-  console.log(storedProductIds);
-  console.log(products);
+  // console.log(storedProductIds);
+  // console.log(products);
 
   // localStorage.setItem(cartId, {id: item.id, products:{...item, quantity}}
   //     )
+
+  console.log(id);
 }
 
 export default addCartItems;

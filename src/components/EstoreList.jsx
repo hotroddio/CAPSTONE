@@ -3,10 +3,13 @@ import { Link, useParams } from "react-router-dom";
 import addCartItems from "../components/utilitiesCart";
 import { useState } from "react";
 
-function EstoreList(props) {
-  let {id} = useParams();
-  const { data, error, isLoading } = useEstoreListQuery(props.token);
-  const [ searchTerm, setSearchTerm ] = useState("");
+// function EstoreList(props) {
+function EstoreList({ token, products, setProducts, localCart, setLocalCart }) {
+  let { id } = useParams();
+  // const { data, error, isLoading } = useEstoreListQuery(props.token);
+  const { data, error, isLoading } = useEstoreListQuery(token);
+  const [searchTerm, setSearchTerm] = useState("");
+  // const [ cartItems, setCartItems] = useState([]);
 
   console.log("DATA from API", data);
   console.log("Error from API", error);
@@ -21,21 +24,60 @@ function EstoreList(props) {
     return <p>Something went wrong!!!</p>;
   }
 
-  props.setProducts(data);
+  // props.setProducts(data)
+  setProducts(data);
 
   const eventHandler = async (event) => {
     event.preventDefault();
     addCartItems();
     console.log(addCartItems(data));
-  }
-console.log(data?.[1].title);
+  };
+  console.log(data?.[1].title);
 
-let filteredData =
-    searchTerm ? data.filter((item) =>
-        {return item.title.toLowerCase().includes(searchTerm.toLowerCase())}
-    ) :data;
+  // The below section allows me to search dynamically through titles
+  let filteredData = searchTerm
+    ? data.filter((item) => {
+        return item.title.toLowerCase().includes(searchTerm.toLowerCase());
+      })
+    : data;
 
   console.log(filteredData);
+  console.log(localCart);
+
+  // The below allows me to add items to the cart
+  const handleAddToCart = (item) => {
+    let updatedCart = [...localCart];
+    const existingItemIndex = updatedCart.findIndex(cartItem => cartItem.id === item.id);
+    console.log(updatedCart);
+    console.log(existingItemIndex);
+    if (existingItemIndex !== -1) {
+      updatedCart[existingItemIndex].quantity += 1;
+    } else {
+      updatedCart.push({
+        ...item
+      });
+    }
+    console.log("----", updatedCart);
+    setLocalCart(updatedCart);
+    window.localStorage.setItem("localCart", JSON.stringify(updatedCart));
+
+    // let newItem = {
+    //   category: item.category,
+    //   description: item.description,
+    //   id: item.id,
+    //   image: item.image,
+    //   price: item.price,
+    //   rating: {
+    //     rate: item.rating.rate,
+    //     count: item.rating.count,
+    //   },
+    //   title: item.title,
+    //   quantity: 1,
+    // };
+    // setLocalCart([...localCart, newItem]);
+    // window.localStorage.setItem("localCart", JSON.stringify(localCart));
+    // console.log(newItem);
+  };
 
   return (
     <div>
@@ -62,7 +104,9 @@ let filteredData =
               Rating: {item.rating.rate} ({item.rating.count} reviews)
             </p>
             <Link to={`/estoreitem/${item.id}`}>More Information</Link>
-            <button>Add Item to Cart</button>
+            <button onClick={() => handleAddToCart(item)}>
+              Add Item to Cart
+            </button>
           </div>
         );
       })}

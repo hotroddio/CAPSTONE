@@ -5,6 +5,7 @@ function NavBar(props) {
   const logoutUser = () => {
     props.setToken(null);
     props.setUserId(null);
+    props.setLocalCart(null);
     // Below statement navigates us back to the homepage after logout
     navigate("/");
   };

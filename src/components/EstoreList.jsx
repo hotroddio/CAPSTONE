@@ -47,14 +47,16 @@ function EstoreList({ token, products, setProducts, localCart, setLocalCart }) {
   // The below allows me to add items to the cart
   const handleAddToCart = (item) => {
     let updatedCart = [...localCart];
-    const existingItemIndex = updatedCart.findIndex(cartItem => cartItem.id === item.id);
+    const existingItemIndex = updatedCart.findIndex(
+      (cartItem) => cartItem.id === item.id
+    );
     console.log(updatedCart);
     console.log(existingItemIndex);
     if (existingItemIndex !== -1) {
       updatedCart[existingItemIndex].quantity += 1;
     } else {
       updatedCart.push({
-        ...item
+        ...item,
       });
     }
     console.log("----", updatedCart);

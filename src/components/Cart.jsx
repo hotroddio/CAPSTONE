@@ -81,7 +81,7 @@ function Cart({ token, products, setLocalCart, localCart }) {
     setTotalPrice(subTotalPrice + subTotalPrice * 0.07 + 10.99);
   }, [subTotalPrice]);
 
-  // useEffect(() =>{
+
   if (data && !loadingCart) {
     let k = JSON.parse(window.localStorage.getItem("localCart"));
     if (k) {

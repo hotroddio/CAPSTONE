@@ -1,0 +1,17 @@
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    background-color: blue; 
+}
+
+nav > a {
+    color: white;
+}
+
+.active {
+    text-decoration: underline;
+}

@@ -45,24 +45,12 @@ function Login(props) {
   if (error) {
     return <p>Something went wrong!!!</p>;
   }
-
-  console.log("DATA from API", data?.[0]?.username);
-  console.log("Error from API", error);
-  console.log("isLoading", isLoading);
-  console.log("Price data", data?.[0]?.title);
-
   
 
 if (data) { 
   const user = data.find((user) => user.username === userInfo.username && userInfo.password === user.password)
-  console.log(user?.id);
   props.setUserId(user?.id);
 }
-
-console.log(props.userId);
-
-// const userId = user?id;
-
 
   return (
     <div>

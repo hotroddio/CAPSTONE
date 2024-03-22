@@ -1,0 +1,14 @@
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+input {
+    margin-left: 24px;
+}
+
+.submitBtn {
+    margin: 15px;
+    background-color: blue;
+}

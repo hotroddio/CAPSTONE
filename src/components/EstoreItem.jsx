@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useEstoreListItemQuery } from "../redux/api";
 
 function EstoreItem({ token }) {
@@ -18,14 +18,16 @@ function EstoreItem({ token }) {
     <section>
       <h2>Item Description</h2>
       <h2>Item Name: {data.title}</h2>
-      <h1>Price: ${data.price}</h1>
+      <h1>Price: ${data.price.toFixed(2)}</h1>
       <p>Category: {data.category}</p>
       <img src={data.image} alt={data.title} />
       <p>
         Rating: {data.rating.rate} ({data.rating.count} reviews)
       </p>
       <h3>{data.description}</h3>
+      <Link to={`/estore`}>Return to Store</Link>
     </section>
+    
   );
 }
 

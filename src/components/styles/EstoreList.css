@@ -1,0 +1,25 @@
+.estoreListItems {
+    width: 360px;
+    margin: 15px auto;
+    background-color: tan;
+    border: solid;
+    border-radius: 8px;
+    box-shadow: 5px 5px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.estoreListItems:hover {
+    transform: translateY(-5px);
+}
+
+.entireList {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+}

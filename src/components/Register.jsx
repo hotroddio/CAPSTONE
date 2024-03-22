@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRegisterMutation } from "../redux/api";
 import { useNavigate } from "react-router-dom";
+import "./styles/Register.css";
 
 function Register(props) {
   const [userInfo, setUserInfo] = useState({
@@ -162,7 +163,7 @@ function Register(props) {
             onChange={onUserInput}
           />
         </label>
-        <button>Submit</button>
+        <button className="submitBtn">Submit</button>
       </form>
     </div>
   );

@@ -3,9 +3,9 @@ import { Link, useParams } from "react-router-dom";
 import addCartItems from "../components/utilitiesCart";
 import { useState } from "react";
 // import { addToCart } from "../redux/api";
-import "./styles/EstoreList.css"
-import { cartActions } from "../redux/cartSlice";
-import { useDispatch } from "react-redux";
+import "./styles/EstoreList.css";
+import { addToCart, removeFromCart } from "../redux/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 // function EstoreList(props) {
 function EstoreList({ token, products }) {
@@ -15,24 +15,7 @@ function EstoreList({ token, products }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const dispatch = useDispatch();
-  
-  
-  const onAddToCart = (e) => {
-    e.preventDefault();
-  
-
-  const action = e.nativeEvent.submitter.name;
-
-  switch (action.type) {
-    case cartActions.addToCart.type:
-      const newItem = action.payload;
-      break;
-  }
-}
-  // const [ cartItems, setCartItems] = useState([]);
-
-  // console.log("Price data", data?.[0]?.title);
-
+  const cartItems = useSelector((state) => state.cart.itemsList);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -41,10 +24,8 @@ function EstoreList({ token, products }) {
   if (error) {
     return <p>Something went wrong!!!</p>;
   }
-
+  console.log(data);
   // setProducts(data);
-
-  
 
   // const eventHandler = async (event) => {
   //   event.preventDefault();
@@ -52,11 +33,11 @@ function EstoreList({ token, products }) {
   //   console.log(addCartItems(data));
   // };
 
-
   // The below section allows me to search dynamically through titles
-  let filteredData = selectedCategory === "All"
-  ? data
-  : data.filter(item => item.category === selectedCategory);
+  let filteredData =
+    selectedCategory === "All"
+      ? data
+      : data.filter((item) => item.category === selectedCategory);
 
   filteredData = searchTerm
     ? filteredData.filter((item) => {
@@ -64,38 +45,39 @@ function EstoreList({ token, products }) {
       })
     : filteredData;
 
-  
-
   // console.log(filteredData);
-  
+
   // The below allows me to add items to the cart
   const handleAddToCart = (item) => {
     console.log("Adding item to cart:", item);
-  dispatch(cartActions.addToCart(item));
+    dispatch(addToCart(item));
   };
-
+  console.log("Cart items:", cartItems);
 
   return (
-    <div >
+    <div>
       <div>
-      <h2>E-Store List</h2>
-      <select value={selectedCategory} onChange={e => setSelectedCategory(e.target.value)}>
-        <option value="All">All Items</option>
-        <option value="mens' clothing">Men's Clothing</option>
-        <option value="jewelery">Jewelery</option>
-        <option value="electronics">Electronics</option>
-        <option value="women's clothing">Women's Clothing</option>
-      </select>
-          <input
-            type="text"
-            placeholder="Search.."
-            id="search"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          </div>
-          <div className="entireList">
-      {filteredData.map (item => (
+        <h2>E-Store List</h2>
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
+          <option value="All">All Items</option>
+          <option value="mens' clothing">Men's Clothing</option>
+          <option value="jewelery">Jewelery</option>
+          <option value="electronics">Electronics</option>
+          <option value="women's clothing">Women's Clothing</option>
+        </select>
+        <input
+          type="text"
+          placeholder="Search.."
+          id="search"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+      <div className="entireList">
+        {filteredData.map((item) => (
           <div className="estoreListItems" key={item.id}>
             <h5>Item Name: {item.title}</h5>
             <p>Price: ${item.price.toFixed(2)}</p>
@@ -109,7 +91,7 @@ function EstoreList({ token, products }) {
               Add Item to Cart
             </button>
           </div>
-      ))}
+        ))}
       </div>
     </div>
   );

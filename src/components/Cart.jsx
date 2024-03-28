@@ -1,11 +1,12 @@
 import { useEstoreListQuery } from "../redux/api";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   removeFromCart,
   adjustQuantityFromCart,
   updateTotalQuantity,
+  clearCart,
 } from "../redux/cartSlice";
 // api
 import "./styles/Cart.css";
@@ -58,7 +59,10 @@ function Cart({ token, products }) {
       adjustQuantityFromCart({ itemId, newQuantity: item.quantity - 1 })
     );
   }
-
+  function emptyCart(e) {
+    console.log("clearCart");
+    dispatch(clearCart());
+  }
   return (
     <div>
       <h2>Cart Items</h2>
@@ -78,12 +82,16 @@ function Cart({ token, products }) {
                 Remove Item from Cart
               </button>
               <button onClick={handleQuantity} id={item?.id}>
-                Quantity
+                Reduce Quantity
               </button>
             </div>
           ))}
       </div>
       <h2>Cart Sub Total: ${subTotalPrice.toFixed(2)}</h2>
+      <Link className="returnToStore" to={`/estore`}>Return to Store</Link>
+      <button onClick={emptyCart}>
+      <Link to={`/checkout`}>Checkout</Link>
+      </button>      
       {subTotalPrice === 0 ? (
         <div>So Much Empty...</div>
       ) : (

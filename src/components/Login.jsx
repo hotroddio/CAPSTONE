@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 //api
 import { useLoginMutation, useGetUserIdQuery } from "../redux/api";
+import "./styles/Login.css"
 
 function Login(props) {
   const [userInfo, setUserInfo] = useState({
@@ -77,7 +78,7 @@ if (data) {
             onChange={onUserInput}
           />
         </label>
-        <button>Submit</button>
+        <button className="submitBtnLogin">Submit</button>
       </form>
     </div>
   );

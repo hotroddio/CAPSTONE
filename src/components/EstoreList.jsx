@@ -24,14 +24,6 @@ function EstoreList({ token, products }) {
   if (error) {
     return <p>Something went wrong!!!</p>;
   }
-  console.log(data);
-  // setProducts(data);
-
-  // const eventHandler = async (event) => {
-  //   event.preventDefault();
-  //   addCartItems();
-  //   console.log(addCartItems(data));
-  // };
 
   // The below section allows me to search dynamically through titles
   let filteredData =
@@ -44,8 +36,6 @@ function EstoreList({ token, products }) {
         return item.title.toLowerCase().includes(searchTerm.toLowerCase());
       })
     : filteredData;
-
-  // console.log(filteredData);
 
   // The below allows me to add items to the cart
   const handleAddToCart = (item) => {

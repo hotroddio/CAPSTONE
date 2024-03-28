@@ -11,6 +11,7 @@ import NavBar from "./components/Navbar";
 import EstoreList from "./components/EstoreList";
 import EstoreItem from "./components/EstoreItem";
 import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -69,6 +70,14 @@ function App() {
               />
             }
           />
+          <Route
+            path="checkout"
+            element={
+              <Checkout
+                token={token}
+                />
+            }
+            />
         </Routes>
       </BrowserRouter>
     </div>

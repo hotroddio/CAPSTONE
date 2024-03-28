@@ -23,3 +23,8 @@
     flex-wrap: wrap;
     align-content: center;
 }
+
+.returnToStore {
+    background-color: lightgray;
+    border-radius: 5px;
+}

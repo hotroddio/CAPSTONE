@@ -88,10 +88,12 @@ function Cart({ token, products }) {
           ))}
       </div>
       <h2>Cart Sub Total: ${subTotalPrice.toFixed(2)}</h2>
-      <Link className="returnToStore" to={`/estore`}>Return to Store</Link>
+      <Link className="returnToStore" to={`/estore`}>
+        Return to Store
+      </Link>
       <button onClick={emptyCart}>
-      <Link to={`/checkout`}>Checkout</Link>
-      </button>      
+        <Link to={`/checkout`}>Checkout</Link>
+      </button>
       {subTotalPrice === 0 ? (
         <div>So Much Empty...</div>
       ) : (

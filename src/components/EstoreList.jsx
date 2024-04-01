@@ -60,7 +60,7 @@ function EstoreList({ token, products }) {
         </select>
         <input
           type="text"
-          placeholder="Search.."
+          placeholder="Search by Title"
           id="search"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -69,9 +69,8 @@ function EstoreList({ token, products }) {
       <div className="entireList">
         {filteredData.map((item) => (
           <div className="estoreListItems" key={item.id}>
-            <h5>Item Name: {item.title}</h5>
+            <h5>{item.title}</h5>
             <p>Price: ${item.price.toFixed(2)}</p>
-            <p>Category: {item.category}</p>
             <img src={item.image} alt={item.title} />
             <p>
               Rating: {item.rating.rate} ({item.rating.count} reviews)

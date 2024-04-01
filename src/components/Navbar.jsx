@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import "./styles/Navbar.css";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 function NavBar(props) {
   const navigate = useNavigate();
@@ -16,9 +17,9 @@ function NavBar(props) {
       <nav>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/estore">E-Store</NavLink>
-        <NavLink to={`/cart/${props.userId}`}>Cart</NavLink>
         <NavLink to={`/account/${props.userId}`}>Account</NavLink>
         <a onClick={logoutUser}>Logout</a>
+        <NavLink to={`/cart/${props.userId}`}><ShoppingCartIcon/></NavLink>
       </nav>
     );
   }

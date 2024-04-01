@@ -9,9 +9,9 @@
     position: relative;
     transition: transform 0.3s;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
+    flex-direction: column;
 }
 
 .estoreListItems:hover {

@@ -27,11 +27,28 @@ function Register(props) {
   const [register] = useRegisterMutation();
   const navigate = useNavigate();
 
+  const requiredFields = [
+    userInfo.email,
+    userInfo.username,
+    userInfo.password,
+    name.firstname,
+    name.lastname,
+    address.city,
+    address.street,
+    address.number,
+    address.zipcode,
+    userInfo.phone,
+  ];
+
   const eventHandler = async (event) => {
     event.preventDefault();
+
+    if (requiredFields.some((field) => !field)) {
+      window.alert("Please fill in all required fields.");
+      return; 
+    }
+    
     const { data, error } = await register({ userInfo, name, address });
-    //data.token --> has token value
-    //error.data.message
 
     if (error) {
       setError(errorMsg);
@@ -41,6 +58,8 @@ function Register(props) {
       navigate("/");
       console.log(`in event handler ${JSON.stringify(data)}`);
     }
+
+    setError(null);
   };
 
   const onUserInput = (e) => {
@@ -61,7 +80,7 @@ function Register(props) {
   return (
     <div>
       <h2>Register</h2>
-      {errorMsg ? <p>{errorMsg}</p> : <span />}
+      {errorMsg ? <p>{errorMsg}</p> : null}
       <form onSubmit={eventHandler}>
         <label>
           E-mail
@@ -141,6 +160,7 @@ function Register(props) {
             value={address.number}
             name="number"
             onChange={onAddressInput}
+
           />
         </label>
         <label>
@@ -163,7 +183,7 @@ function Register(props) {
             onChange={onUserInput}
           />
         </label>
-        <button className="submitBtn">Submit</button>
+        <button className="submitBtn" disabled={requiredFields.some((field) => !field)}>Submit</button>
       </form>
     </div>
   );

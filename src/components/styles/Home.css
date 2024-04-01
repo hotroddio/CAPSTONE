@@ -1,0 +1,7 @@
+.contentContainer {
+    max-width: 900px;
+    margin: 0;
+    padding: 2rem;
+    display: inline-block;
+    font-weight: bold;
+}

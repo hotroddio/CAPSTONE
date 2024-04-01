@@ -69,7 +69,7 @@ if (data) {
           />
         </label>
         <label>
-          Password m38rmF$
+          Password
           <input
             type="password"
             placeholder="password"

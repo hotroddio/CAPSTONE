@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useAccountQuery } from "../redux/api";
+import "./styles/Accounts.css"
 
 function Accounts({ token }) {
   let {id} = useParams();
@@ -22,7 +23,7 @@ function Accounts({ token }) {
   return (
     <section>
       <h2>Account</h2>
-      <ul>
+      <ul className="accountInfo">
         <h3>User Information</h3>
         {data?.username ? (<li>Username:{data?.username}</li>) : ""}
         {data?.email ? (<li>Email:{data?.email}</li>) : ""}

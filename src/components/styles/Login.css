@@ -1,5 +1,5 @@
-/* form {
-    display: flex;
+form {
+    display: inline-flex;
     flex-direction: column;
     align-items: flex-end;
 }
@@ -12,4 +12,4 @@ input {
     margin: 15px;
     background-color: blue;
     color: white;
-} */
+}

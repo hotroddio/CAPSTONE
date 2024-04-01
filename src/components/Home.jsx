@@ -1,7 +1,13 @@
 import StoreFront from '../assets/StoreFront.jpg';
+import FlagBackground from '../assets/American_flag_bkgrnd.jpg';
+import "./styles/Home.css";
 
 function Home() {
-    return (<div>
+    return (<div className="contentContainer" style={{
+        backgroundImage: `url(${FlagBackground})`,
+        backgroundSize: 'cover', 
+        color: 'beige',
+    }}>
         <h1>Welcome to store America</h1>
         <img src={StoreFront} />
         <p>**Discover America: Where Craftsmanship Meets Choice!**</p>
